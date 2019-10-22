@@ -1,30 +1,9 @@
 import React from "react";
-import logo, { ReactComponent } from "./logo.svg";
-import Inputs from "./Inputs";
 import "./App.css";
-import { makeStyles } from "@material-ui/core/styles";
 import forge from "node-forge";
-import {
-  Avatar,
-  Button,
-  ButtonGroup,
-  CssBaseline,
-  TextField,
-  FormControlLabel,
-  Checkbox,
-  Link,
-  Grid,
-  Box,
-  Typography,
-  Container,
-  Input,
-  Radio,
-  RadioGroup,
-  FormLabel,
-  FormControl,
-  Divider
-} from "@material-ui/core";
 import AlgButtons from "./AlgButtons";
+import HashItButton from "./HashItButton";
+import { TextField, Typography, Container, Divider } from "@material-ui/core";
 
 function SHA1() {
   var forge = require("node-forge");
@@ -47,23 +26,18 @@ class App extends React.Component {
     this.handleSaltChange = this.handleSaltChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.hashing = this.hashing.bind(this);
     this.handleRadioChange = this.handleRadioChange.bind(this);
-  }
 
-  algButtons = () => {};
+    this.hash = this.hash.bind(this);
+    this.hashingSHA = this.hashingSHA.bind(this);
+    this.hashingSHA256 = this.hashingSHA256.bind(this);
+    this.hashingSHA512 = this.hashingSHA512.bind(this);
+  }
 
   handleRadioChange = event => {
     this.setState({ algSelected: event.target.value });
   };
 
-  handleClick() {
-    let hex = SHA1();
-    console.log("handleClick");
-    this.setState({
-      hashed: hex
-    });
-  }
   handlePasswordChange = event => {
     this.setState({
       testPassword: event.target.value
@@ -84,11 +58,48 @@ class App extends React.Component {
     console.log(event.target);
   };
 
-  hashing = () => {
+  hash() {
+    let alg = this.state.algSelected;
+    if (alg === "SHA") {
+      this.hashingSHA();
+    } else if (alg === "SHA256") {
+      this.hashingSHA256();
+    } else if (alg === "SHA512") {
+      this.hashingSHA512();
+    }
+  }
+
+  hashingSHA = () => {
+    const md = forge.md.sha1.create();
+    const s = this.state.salt;
+    const p = this.state.testPassword;
+    md.update(p);
+    console.log("SHA1");
+    console.log(forge.util.encode64(md.digest().toHex()));
+    let hp = forge.util.encode64(md.digest().toHex());
+    this.setState({
+      hashedPassword: hp
+    });
+  };
+
+  hashingSHA256 = () => {
     const md = forge.md.sha256.create();
     const s = this.state.salt;
     const p = this.state.testPassword;
     md.update(p);
+    console.log(forge.util.encode64(md.digest().toHex()));
+    let hp = forge.util.encode64(md.digest().toHex());
+    this.setState({
+      hashedPassword: hp
+    });
+  };
+
+  hashingSHA512 = () => {
+    const md = forge.md.sha512.create();
+    const s = this.state.salt;
+    const p = this.state.testPassword;
+    md.update(p);
+    console.log("SHA512");
     console.log(forge.util.encode64(md.digest().toHex()));
     let hp = forge.util.encode64(md.digest().toHex());
     this.setState({
@@ -113,7 +124,7 @@ class App extends React.Component {
             component="h1"
             variant="h3"
             align="center"
-            color="primary"
+            color="#2E4355"
             gutterBottom
           >
             Password Hashing Checker
@@ -139,7 +150,7 @@ class App extends React.Component {
               id="test-password-input"
               label="Test Password"
               multiline
-              rowsMax="4"
+              rows="4"
               placeholder="Test Password"
               margin="normal"
               variant="outlined"
@@ -152,15 +163,7 @@ class App extends React.Component {
               algSelected={this.state.algSelected}
               handleRadioChange={this.handleRadioChange}
             />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              onClick={this.hashing}
-            >
-              Hash It
-            </Button>
+            <HashItButton onClick={this.hash}>Hash It</HashItButton>
             <TextField
               fullWidth
               id="outlined-read-only-input"
