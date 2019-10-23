@@ -27,6 +27,11 @@ const styles = {
   body: {
     color: "#ffffff"
   },
+  warning: {
+    color: "#ffffff",
+    lineHeight: 0.9,
+    display: "block"
+  },
   button: {
     color: "#ffffff",
     borderColor: "#ffffff"
@@ -56,13 +61,17 @@ function InfoCard(props) {
           variant="body1"
           component="h2"
           align="left"
+          gutterBottom
         >
           This tool is for you to check that your algorithm complies with the
           LDAP userPassword hashing algorithm. Use a test salt and test password
           and compare the output of your algorithm with the one here.
         </Typography>
-        <Typography className={classes.body} variant="caption" align="left">
-          {ast}Not meant for use with real passwords. Use a dummy password!
+
+        <Typography className={classes.warning} variant="caption" align="left">
+          {ast}Not meant for use with real passwords.
+          <br />
+          {ast}Use a dummy password!
         </Typography>
       </CardContent>
       <CardActions>
