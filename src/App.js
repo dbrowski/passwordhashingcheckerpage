@@ -60,11 +60,11 @@ class App extends React.Component {
     let pHash;
 
     if (alg === "SHA") {
-      pHash = this.hashingSHA(pHex, sHex);
+      pHash = this.hashingSHA(sHex, pHex);
     } else if (alg === "SHA256") {
-      pHash = this.hashingSHA256(pHex, sHex);
+      pHash = this.hashingSHA256(sHex, pHex);
     } else if (alg === "SHA512") {
-      pHash = this.hashingSHA512(pHex, sHex);
+      pHash = this.hashingSHA512(sHex, pHex);
     }
 
     const hashandsalt = pHash + sHex;

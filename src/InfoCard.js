@@ -57,13 +57,12 @@ function InfoCard(props) {
           component="h2"
           align="left"
         >
-          This tool is used to compare your algorithm complies with the of the
+          This tool is for you to check that your algorithm complies with the
           LDAP userPassword hashing algorithm. Use a test salt and test password
-          (not a real password!) and compare the output of your algorithm with
-          the one here.
+          and compare the output of your algorithm with the one here.
         </Typography>
         <Typography className={classes.body} variant="caption" align="left">
-          {ast}Not meant to test real passwords. Use a dummy password!
+          {ast}Not meant for use with real passwords. Use a dummy password!
         </Typography>
       </CardContent>
       <CardActions>
