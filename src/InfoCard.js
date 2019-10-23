@@ -1,40 +1,41 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+import HelpIcon from "@material-ui/icons/Help";
 import {
   Card,
-  Button,
   Typography,
   CardContent,
-  CardActions
+  CardActions,
+  IconButton
 } from "@material-ui/core";
 
 const styles = {
   card: {
-    backgroundColor: "#2e4355",
+    backgroundColor: "",
     minWidth: 275
   },
   asterisk: {
-    color: "#ffffff",
+    color: "#2e4355",
     display: "inline-block",
     margin: "0 2px",
     transform: "scale(0.8)"
   },
   title: {
-    color: "#ffffff",
+    color: "#2e4355",
     variant: "h1"
   },
   body: {
-    color: "#ffffff"
+    color: "#2e4355"
   },
   warning: {
-    color: "#ffffff",
+    color: "#2e4355",
     lineHeight: 0.9,
     display: "block"
   },
   button: {
-    color: "#ffffff",
-    borderColor: "#ffffff"
+    color: "#2e4355",
+    borderColor: "#2e4355"
   },
   pos: {
     marginBottom: 12
@@ -63,9 +64,10 @@ function InfoCard(props) {
           align="left"
           gutterBottom
         >
-          This tool is for you to check that your algorithm complies with the
-          LDAP userPassword hashing algorithm. Use a test salt and test password
-          and compare the output of your algorithm with the one here.
+          This tool is for you to check that your algorithm outputs the same
+          encoded password as the LDAP userPassword hashing algorithm. Use a
+          test salt and test password and compare the output of your algorithm
+          with the one here.
         </Typography>
 
         <Typography className={classes.warning} variant="caption" align="left">
@@ -75,14 +77,14 @@ function InfoCard(props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button
+        <IconButton
           className={classes.button}
           variant="outlined"
           size="small"
           href="https://tools.ietf.org/id/draft-stroeder-hashed-userpassword-values-01.html"
         >
-          LDAP userPassword
-        </Button>
+          <HelpIcon />
+        </IconButton>
       </CardActions>
     </Card>
   );

@@ -4,7 +4,7 @@ import forge from "node-forge";
 import AlgButtons from "./AlgButtons";
 import HashItButton from "./HashItButton";
 import InfoCard from "./InfoCard";
-import { TextField, Typography, Container, Divider } from "@material-ui/core";
+import { TextField, Container, Divider } from "@material-ui/core";
 
 class App extends React.Component {
   constructor(props) {
