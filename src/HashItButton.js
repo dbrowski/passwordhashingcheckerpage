@@ -26,7 +26,7 @@ const styles = {
 function HashItButton(props) {
   const { classes } = props;
   return (
-    <Button className={classes.root} onClick={props.onClick}>
+    <Button className={classes.root} type={props.type}>
       Hash It
     </Button>
   );

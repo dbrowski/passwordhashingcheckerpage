@@ -3,6 +3,7 @@ import "./App.css";
 import forge from "node-forge";
 import AlgButtons from "./AlgButtons";
 import HashItButton from "./HashItButton";
+import InfoCard from "./InfoCard";
 import { TextField, Typography, Container, Divider } from "@material-ui/core";
 
 class App extends React.Component {
@@ -33,20 +34,19 @@ class App extends React.Component {
     this.setState({
       testPassword: event.target.value
     });
-    console.log(event.target.value);
   };
 
   handleSaltChange = event => {
     this.setState({
       salt: event.target.value
     });
-    console.log(event.target.value);
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event, state) => {
     event.preventDefault();
-    console.log("submit");
-    console.log(event.target);
+    if (this.state.salt && this.state.testPassword) {
+      this.hash();
+    }
   };
 
   hash() {
@@ -60,11 +60,11 @@ class App extends React.Component {
     let pHash;
 
     if (alg === "SHA") {
-      pHash = this.hashingSHA();
+      pHash = this.hashingSHA(pHex, sHex);
     } else if (alg === "SHA256") {
-      pHash = this.hashingSHA256();
+      pHash = this.hashingSHA256(pHex, sHex);
     } else if (alg === "SHA512") {
-      pHash = this.hashingSHA512();
+      pHash = this.hashingSHA512(pHex, sHex);
     }
 
     const hashandsalt = pHash + sHex;
@@ -108,16 +108,7 @@ class App extends React.Component {
         </header>
 
         <Container className="Main-Container" maxWidth="xs">
-          <Typography
-            className="Title"
-            component="h1"
-            variant="h3"
-            align="center"
-            color="#2E4355"
-            gutterBottom
-          >
-            Password Hashing Checker
-          </Typography>
+          <InfoCard></InfoCard>
           <form onSubmit={this.handleSubmit}>
             <TextField
               required
@@ -152,7 +143,7 @@ class App extends React.Component {
               algSelected={this.state.algSelected}
               handleRadioChange={this.handleRadioChange}
             />
-            <HashItButton onClick={this.hash}>Hash It</HashItButton>
+            <HashItButton type="submit">Hash It</HashItButton>
             <TextField
               fullWidth
               id="outlined-read-only-input"
