@@ -5,15 +5,6 @@ import AlgButtons from "./AlgButtons";
 import HashItButton from "./HashItButton";
 import { TextField, Typography, Container, Divider } from "@material-ui/core";
 
-function SHA1() {
-  var forge = require("node-forge");
-  var md = forge.md.sha1.create();
-  md.update("The quick brown fox jumps over the lazy dog");
-  let hex = md.digest().toHex();
-  console.log("sha1");
-  return hex;
-}
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -59,52 +50,50 @@ class App extends React.Component {
   };
 
   hash() {
-    let alg = this.state.algSelected;
+    const alg = this.state.algSelected;
+    const s = this.state.salt;
+    const p = this.state.testPassword;
+    let pBuffer = forge.util.createBuffer(p, "utf8");
+    const sBuffer = forge.util.createBuffer(s, "utf8");
+    const pHex = pBuffer.toHex();
+    const sHex = sBuffer.toHex();
+    let pHash;
+
     if (alg === "SHA") {
-      this.hashingSHA();
+      pHash = this.hashingSHA();
     } else if (alg === "SHA256") {
-      this.hashingSHA256();
+      pHash = this.hashingSHA256();
     } else if (alg === "SHA512") {
-      this.hashingSHA512();
+      pHash = this.hashingSHA512();
     }
+
+    const hashandsalt = pHash + sHex;
+    const b64_hashandsalt = forge.util.encode64(hashandsalt);
+    let hp = b64_hashandsalt;
+    this.setState({
+      hashedPassword: hp
+    });
   }
 
-  hashingSHA = () => {
+  hashingSHA = (sHex, pHex) => {
     const md = forge.md.sha1.create();
-    const s = this.state.salt;
-    const p = this.state.testPassword;
-    md.update(p);
-    console.log("SHA1");
-    console.log(forge.util.encode64(md.digest().toHex()));
-    let hp = forge.util.encode64(md.digest().toHex());
-    this.setState({
-      hashedPassword: hp
-    });
+    md.update(pHex + sHex);
+    const pHash = md.digest().toHex();
+    return pHash;
   };
 
-  hashingSHA256 = () => {
+  hashingSHA256 = (sHex, pHex) => {
     const md = forge.md.sha256.create();
-    const s = this.state.salt;
-    const p = this.state.testPassword;
-    md.update(p);
-    console.log(forge.util.encode64(md.digest().toHex()));
-    let hp = forge.util.encode64(md.digest().toHex());
-    this.setState({
-      hashedPassword: hp
-    });
+    md.update(pHex + sHex);
+    const pHash = md.digest().toHex();
+    return pHash;
   };
 
-  hashingSHA512 = () => {
+  hashingSHA512 = (sHex, pHex) => {
     const md = forge.md.sha512.create();
-    const s = this.state.salt;
-    const p = this.state.testPassword;
-    md.update(p);
-    console.log("SHA512");
-    console.log(forge.util.encode64(md.digest().toHex()));
-    let hp = forge.util.encode64(md.digest().toHex());
-    this.setState({
-      hashedPassword: hp
-    });
+    md.update(pHex + sHex);
+    const pHash = md.digest().toHex();
+    return pHash;
   };
 
   render() {
@@ -150,7 +139,7 @@ class App extends React.Component {
               id="test-password-input"
               label="Test Password"
               multiline
-              rows="4"
+              rowsMax="4"
               placeholder="Test Password"
               margin="normal"
               variant="outlined"
@@ -169,7 +158,7 @@ class App extends React.Component {
               id="outlined-read-only-input"
               label="Hashed Password Value"
               multiline
-              rowsMax="4"
+              rows="4"
               value={this.state ? this.state.hashedPassword : null}
               margin="normal"
               InputProps={{

@@ -27,7 +27,7 @@ function HashItButton(props) {
   const { classes } = props;
   return (
     <Button className={classes.root} onClick={props.onClick}>
-      Higher-order component
+      Hash It
     </Button>
   );
 }
