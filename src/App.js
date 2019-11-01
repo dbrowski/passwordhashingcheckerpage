@@ -107,7 +107,7 @@ class App extends React.Component {
           />
         </header>
 
-        <Container className="Main-Container" maxWidth="xs">
+        <Container className="Main-Container" maxWidth="xl">
           <InfoCard></InfoCard>
           <form onSubmit={this.handleSubmit}>
             <TextField
