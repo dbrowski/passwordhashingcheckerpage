@@ -16,7 +16,7 @@ import {
 
 const styles = {
   card: {
-    maxHeight: "40vh",
+    maxHeight: "25vh",
     overflow: "auto"
   },
   title: {
