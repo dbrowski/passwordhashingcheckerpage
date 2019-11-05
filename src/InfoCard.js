@@ -16,9 +16,7 @@ import {
 
 const styles = {
   card: {
-    backgroundColor: "",
-    minWidth: 250,
-    maxHeight: "50vh",
+    maxHeight: "40vh",
     overflow: "auto"
   },
   title: {
