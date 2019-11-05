@@ -99,15 +99,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img
-            src="https://images.pingidentity.com/image/upload/f_auto,q_auto/ping_dam/content/dam/ping-6-2-assets/blogs/headshots/Anthony-Dombrowski.jpg"
-            className="App-logo"
-            alt="logo"
-          />
-        </header>
-
-        <Container className="Main-Container" maxWidth="xl">
+        <Container className="Main-Container" maxWidth="md">
           <InfoCard></InfoCard>
           <form onSubmit={this.handleSubmit}>
             <TextField
@@ -144,6 +136,7 @@ class App extends React.Component {
               handleRadioChange={this.handleRadioChange}
             />
             <HashItButton type="submit">Hash It</HashItButton>
+            <Divider />
             <TextField
               fullWidth
               id="outlined-read-only-input"
