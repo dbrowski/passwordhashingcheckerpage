@@ -16,17 +16,17 @@ import {
 
 const styles = {
   card: {
-    maxHeight: "25vh",
+    maxHeight: "100vh",
     overflow: "auto"
   },
   title: {
     color: "#2e4355",
-    variant: "h1",
-    padding: ".5rem 10rem"
+    maxWidth: "100%",
+    padding: ".5rem 15%"
   },
   body: {
     color: "#2e4355",
-    padding: ".5rem 10rem"
+    padding: ".5rem 15%"
   },
   itemInList: {
     color: "#2e4355",
@@ -60,7 +60,7 @@ function InfoCard(props) {
       <CardContent>
         <Typography
           className={classes.title}
-          variant="h3"
+          variant="h4"
           color="textPrimary"
           align="left"
           gutterBottom

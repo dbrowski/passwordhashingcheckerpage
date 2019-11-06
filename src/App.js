@@ -4,7 +4,13 @@ import forge from "node-forge";
 import AlgButtons from "./AlgButtons";
 import HashItButton from "./HashItButton";
 import InfoCard from "./InfoCard";
-import { TextField, Container, Divider } from "@material-ui/core";
+import {
+  Grid,
+  TextField,
+  Container,
+  Divider,
+  Typography
+} from "@material-ui/core";
 
 class App extends React.Component {
   constructor(props) {
@@ -99,59 +105,69 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Container className="Main-Container" maxWidth="md">
-          <InfoCard></InfoCard>
-          <form onSubmit={this.handleSubmit}>
-            <TextField
-              required
-              fullWidth
-              multiline
-              rowsMax="4"
-              id="salt"
-              label="Salt"
-              placeholder="Salt"
-              margin="normal"
-              variant="outlined"
-              onChange={this.handleSaltChange}
-              value={this.state.salt}
-              InputLabelProps={{ shrink: true }}
-            />
-            <TextField
-              required
-              fullWidth
-              id="test-password-input"
-              label="Test Password"
-              multiline
-              rowsMax="4"
-              placeholder="Test Password"
-              margin="normal"
-              variant="outlined"
-              onChange={this.handlePasswordChange}
-              value={this.state.testPassword}
-              InputLabelProps={{ shrink: true }}
-            />
-            <Divider />
-            <AlgButtons
-              algSelected={this.state.algSelected}
-              handleRadioChange={this.handleRadioChange}
-            />
-            <HashItButton type="submit">Hash It</HashItButton>
-            <Divider />
-            <TextField
-              fullWidth
-              id="outlined-read-only-input"
-              label="Hashed Password Value"
-              multiline
-              rows="4"
-              value={this.state ? this.state.hashedPassword : null}
-              margin="normal"
-              InputProps={{
-                readOnly: true
-              }}
-              variant="outlined"
-              InputLabelProps={{ shrink: true }}
-            />
-          </form>
+        <Container className="Main-Container" maxWidth="xl">
+          <Grid container spacing={3}>
+            <Grid item xs={9}>
+              <InfoCard></InfoCard>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography variant="h5" gutterBottom>
+                Hash Your Password Here!
+              </Typography>
+              <form onSubmit={this.handleSubmit}>
+                <TextField
+                  required
+                  fullWidth
+                  multiline
+                  rowsMax="4"
+                  id="salt"
+                  label="Salt"
+                  placeholder="Salt"
+                  margin="normal"
+                  variant="outlined"
+                  onChange={this.handleSaltChange}
+                  value={this.state.salt}
+                  InputLabelProps={{ shrink: true }}
+                />
+                <TextField
+                  required
+                  fullWidth
+                  id="test-password-input"
+                  label="Test Password"
+                  multiline
+                  rowsMax="4"
+                  placeholder="Test Password"
+                  margin="normal"
+                  variant="outlined"
+                  onChange={this.handlePasswordChange}
+                  value={this.state.testPassword}
+                  InputLabelProps={{ shrink: true }}
+                />
+                <Divider />
+                <AlgButtons
+                  algSelected={this.state.algSelected}
+                  handleRadioChange={this.handleRadioChange}
+                />
+                <HashItButton type="submit">Hash It</HashItButton>
+                <Divider />
+                <TextField
+                  fullWidth
+                  id="outlined-read-only-input"
+                  label="Hashed Password Value"
+                  multiline
+                  rows="4"
+                  value={this.state ? this.state.hashedPassword : null}
+                  margin="normal"
+                  InputProps={{
+                    readOnly: true
+                  }}
+                  variant="outlined"
+                  InputLabelProps={{ shrink: true }}
+                />
+              </form>
+            </Grid>
+          </Grid>
+          <Grid container spacing={3} justify="center"></Grid>
         </Container>
       </div>
     );
