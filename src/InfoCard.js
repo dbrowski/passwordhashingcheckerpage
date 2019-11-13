@@ -59,16 +59,6 @@ function InfoCard(props) {
     <Card className={classes.card}>
       <CardContent>
         <Typography
-          className={classes.title}
-          variant="h4"
-          color="textPrimary"
-          align="left"
-          gutterBottom
-        >
-          Password Hashing Checker
-        </Typography>
-
-        <Typography
           className={classes.body}
           variant="body1"
           component="h2"

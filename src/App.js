@@ -6,6 +6,7 @@ import HashItButton from "./HashItButton";
 import InfoCard from "./InfoCard";
 import {
   Grid,
+  Card,
   TextField,
   Container,
   Divider,
@@ -106,68 +107,80 @@ class App extends React.Component {
     return (
       <div className="App">
         <Container className="Main-Container" maxWidth="xl">
-          <Grid container spacing={3}>
-            <Grid item xs={9}>
-              <InfoCard></InfoCard>
-            </Grid>
-            <Grid item xs={3}>
-              <Typography variant="h5" gutterBottom>
-                Hash Your Password Here!
-              </Typography>
-              <form onSubmit={this.handleSubmit}>
-                <TextField
-                  required
-                  fullWidth
-                  multiline
-                  rowsMax="4"
-                  id="salt"
-                  label="Salt"
-                  placeholder="Salt"
-                  margin="normal"
-                  variant="outlined"
-                  onChange={this.handleSaltChange}
-                  value={this.state.salt}
-                  InputLabelProps={{ shrink: true }}
-                />
-                <TextField
-                  required
-                  fullWidth
-                  id="test-password-input"
-                  label="Test Password"
-                  multiline
-                  rowsMax="4"
-                  placeholder="Test Password"
-                  margin="normal"
-                  variant="outlined"
-                  onChange={this.handlePasswordChange}
-                  value={this.state.testPassword}
-                  InputLabelProps={{ shrink: true }}
-                />
-                <Divider />
-                <AlgButtons
-                  algSelected={this.state.algSelected}
-                  handleRadioChange={this.handleRadioChange}
-                />
-                <HashItButton type="submit">Hash It</HashItButton>
-                <Divider />
-                <TextField
-                  fullWidth
-                  id="outlined-read-only-input"
-                  label="Hashed Password Value"
-                  multiline
-                  rows="4"
-                  value={this.state ? this.state.hashedPassword : null}
-                  margin="normal"
-                  InputProps={{
-                    readOnly: true
+          <Card>
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <Typography
+                  style={{
+                    color: "#2e4355",
+                    maxWidth: "100%",
+                    padding: ".5rem 15%"
                   }}
-                  variant="outlined"
-                  InputLabelProps={{ shrink: true }}
-                />
-              </form>
+                  variant="h4"
+                  color="textPrimary"
+                  align="centerdd"
+                  gutterBottom
+                >
+                  Password Hashing Checker
+                </Typography>
+                <form onSubmit={this.handleSubmit}>
+                  <TextField
+                    required
+                    fullWidth
+                    multiline
+                    rowsMax="4"
+                    id="salt"
+                    label="Salt"
+                    placeholder="Salt"
+                    margin="normal"
+                    variant="outlined"
+                    onChange={this.handleSaltChange}
+                    value={this.state.salt}
+                    InputLabelProps={{ shrink: true }}
+                  />
+                  <TextField
+                    required
+                    fullWidth
+                    id="test-password-input"
+                    label="Test Password"
+                    multiline
+                    rowsMax="4"
+                    placeholder="Test Password"
+                    margin="normal"
+                    variant="outlined"
+                    onChange={this.handlePasswordChange}
+                    value={this.state.testPassword}
+                    InputLabelProps={{ shrink: true }}
+                  />
+                  <Divider style={{ margin: "2vh 0" }} />
+                  <AlgButtons
+                    algSelected={this.state.aldgSelected}
+                    handleRadioChange={this.handleRadioChange}
+                  />
+                  <HashItButton type="submit">Hash It</HashItButton>
+                  <Divider style={{ margin: "2vh 0" }} />
+                  <TextField
+                    fullWidth
+                    id="outlined-read-only-input"
+                    label="Hashed Password Value"
+                    multiline
+                    rows="4"
+                    value={this.state ? this.state.hashedPassword : null}
+                    margin="normal"
+                    InputProps={{
+                      readOnly: true
+                    }}
+                    variant="outlined"
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </form>
+              </Grid>
+              <Grid item xs={12}>
+                <InfoCard></InfoCard>
+              </Grid>
             </Grid>
-          </Grid>
-          <Grid container spacing={3} justify="center"></Grid>
+            <Grid container spacing={3} justify="center"></Grid>
+          </Card>
         </Container>
       </div>
     );
