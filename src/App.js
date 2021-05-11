@@ -10,7 +10,7 @@ import {
   TextField,
   Container,
   Divider,
-  Typography
+  Typography,
 } from "@material-ui/core";
 
 class App extends React.Component {
@@ -20,7 +20,7 @@ class App extends React.Component {
       salt: "",
       testPassword: "",
       hashedPassword: "",
-      algSelected: "SHA"
+      algSelected: "SHA",
     };
     this.handleSaltChange = this.handleSaltChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -33,19 +33,19 @@ class App extends React.Component {
     this.hashingSHA512 = this.hashingSHA512.bind(this);
   }
 
-  handleRadioChange = event => {
+  handleRadioChange = (event) => {
     this.setState({ algSelected: event.target.value });
   };
 
-  handlePasswordChange = event => {
+  handlePasswordChange = (event) => {
     this.setState({
-      testPassword: event.target.value
+      testPassword: event.target.value,
     });
   };
 
-  handleSaltChange = event => {
+  handleSaltChange = (event) => {
     this.setState({
-      salt: event.target.value
+      salt: event.target.value,
     });
   };
 
@@ -78,7 +78,7 @@ class App extends React.Component {
     const b64_hashandsalt = forge.util.encode64(hashandsalt);
     let hp = b64_hashandsalt;
     this.setState({
-      hashedPassword: hp
+      hashedPassword: hp,
     });
   }
 
@@ -114,7 +114,7 @@ class App extends React.Component {
                   style={{
                     color: "#2e4355",
                     maxWidth: "100%",
-                    padding: ".5rem 15%"
+                    padding: ".5rem 15%",
                   }}
                   variant="h4"
                   color="textPrimary"
@@ -168,13 +168,12 @@ class App extends React.Component {
                     value={this.state ? this.state.hashedPassword : null}
                     margin="normal"
                     InputProps={{
-                      readOnly: true
+                      readOnly: true,
                     }}
                     variant="outlined"
                     InputLabelProps={{ shrink: true }}
                   />
                 </form>
-                ```
               </Grid>
               <Grid item xs={12}>
                 <InfoCard></InfoCard>
