@@ -12,7 +12,7 @@
     "react-dom": "^17.0.2",
     "react-input-mask": "^3.0.0-alpha.0",
     "react-scripts": "4.0.3",
-    "set-value": "^4.0.0",
+    "set-value": "^4.0.1",
     "typeface-roboto": "1.1.13"
   },
   "scripts": {
